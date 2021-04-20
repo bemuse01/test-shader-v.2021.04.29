@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <b><em><u><s>e</s></u></em></b> -->
+
+
+        <meta name="description" content="This is desktop web wallpaper for using Wallpaper Engine users, not for mobile device users.">
+        <meta name="author" content="Bemuse">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+
+        <!-- lib -->
+        <script src="assets/js/lib/vue.min.js"></script>
+        <script src="assets/js/lib/three.min.r126.js"></script>
+        <script src="assets/js/lib/simplex-noise.2.3.0.min.js"></script>
+        <!-- <script src="assets/js/lib/GPUComputationRenderer.js"></script> -->
+    
+        
+        <!-- method -->
+        <script src="assets/js/method/method.js"></script>
+
+
+        <!-- const -->
+        <script src="assets/js/const/const.js"></script>
+
+
+        <!-- object -->
+        <script src="assets/js/object/object.js"></script>
+
+
+        <!-- application -->
+
+        <!-- app -->
+        <script src="assets/js/application/app/app.js"></script>
+        <script src="assets/js/application/app/app.build.js"></script>
+
+        <!-- opening -->
+        <script src="assets/js/application/opening/opening.js"></script>
+        <!-- opening element circle -->
+        <script src="assets/js/application/opening/element/circle/opening.el.circle.param.js"></script>
+        <script src="assets/js/application/opening/element/circle/opening.el.circle.build.js"></script>
+        <!-- opening element build -->
+        <script src="assets/js/application/opening/element/opening.el.build.js"></script>
+
+
+        <!-- style -->
+        <link href="assets/css/main.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="object">
+                <canvas id="canvas"></canvas>
+            </div>
+            <div id="element">
+                <div class="ui opening">
+                    <div class="opening-circle-container">
+                        <div class="opening-circle-center"
+                            v-for="i in element.opening.group.circle.get()"
+                            :key="i.key"
+                        >
+                            <div class="opening-circle-translate" :style="i.style.translate">
+                                <div class="opening-circle" :style="i.style.none"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="opening-text-container">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="assets/js/main/main.js"></script>
+    </body>
+</html>

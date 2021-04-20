@@ -1,0 +1,5 @@
+const OPENING = {
+    element: {
+        circle: {}
+    }
+}
