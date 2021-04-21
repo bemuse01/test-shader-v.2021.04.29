@@ -1,5 +1,6 @@
 const OPENING = {
     element: {
-        circle: {}
+        circle: {},
+        text: {}
     }
 }

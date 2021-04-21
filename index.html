@@ -37,6 +37,8 @@
 
         <!-- opening -->
         <script src="assets/js/application/opening/opening.js"></script>
+        <!-- opening element text -->
+        <script src="assets/js/application/opening/element/text/opening.el.text.build.js"></script>
         <!-- opening element circle -->
         <script src="assets/js/application/opening/element/circle/opening.el.circle.param.js"></script>
         <script src="assets/js/application/opening/element/circle/opening.el.circle.build.js"></script>
@@ -49,10 +51,19 @@
     </head>
     <body>
         <div id="wrap">
+
+
+            <!-- object -->
             <div id="object">
                 <canvas id="canvas"></canvas>
             </div>
+
+
+            <!-- element -->
             <div id="element">
+
+
+                <!-- opening -->
                 <div class="ui opening">
                     <div class="opening-circle-container">
                         <div class="opening-circle-center"
@@ -64,11 +75,24 @@
                             </div>
                         </div>
                     </div>
-                    <div class="opening-text-container">
-
-                    </div>
+                    <transition-group name="blink-transition" tag="div" class="opening-text-container">
+                        <div class="opening-text-animation"
+                            v-for="i in element.opening.group.text.get()"
+                            v-show="i.show"
+                            :key="i.key"
+                            :style="i.style"
+                        >
+                            <div class="opening-text-center">
+                                <span>{{i.text}}</span>
+                            </div>
+                        </div>
+                    </transition-group>
                 </div>
+
+                
             </div>
+
+
         </div>
         <script src="assets/js/main/main.js"></script>
     </body>

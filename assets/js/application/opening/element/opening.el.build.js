@@ -11,7 +11,8 @@ OPENING.element.build = class{
         this.size = element.getBoundingClientRect().width
         
         this.group = {
-            circle: null
+            circle: null,
+            text: null
         }
     }
 
@@ -19,10 +20,15 @@ OPENING.element.build = class{
     // create
     create(){
         this.createCircle()
+        this.createText()
     }
     createCircle(){
         this.group.circle = new OPENING.element.circle.build(this.size)
     }
+    createText(){
+        this.group.text = new OPENING.element.text.build(this.group.circle)
+    }
+
 
 
     // resize
@@ -33,6 +39,15 @@ OPENING.element.build = class{
         for(let i in this.group) {
             if(!this.group[i].resize) continue
             this.group[i].resize(this.size)
+        }
+    }
+
+
+    // animate
+    animate(){
+        for(let i in this.group) {
+            if(!this.group[i].animate) continue
+            this.group[i].animate()
         }
     }
 }

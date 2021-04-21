@@ -47,6 +47,12 @@ new Vue({
                 this.element[i].resize()
             }
         },
+        animateElement(){
+            for(let i in this.element){
+                if(!this.element[i].animate) continue
+                this.element[i].animate()
+            }
+        },
 
 
         // event
@@ -59,6 +65,7 @@ new Vue({
         // render
         render(){
             this.renderThree()
+            this.animateElement()
         },
         animate(){
             this.render()

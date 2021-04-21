@@ -1,17 +1,30 @@
+/* font */
+@font-face {
+    font-family: ENORBITB;
+    src: url('../font/ENORBITB.TTF');
+}
+
+
+/* animation */
 @keyframes fadein{
     0%{
         opacity: 0;
     }
-    50%{
-        opacity: 1.0;
-    }
     100%{
-        opacity: 0;
+        opacity: 1.0;
     }
 }
 @keyframes scale{
     0%{
-        transform: scale(4.0);
+        transform: scale(3.0);
+    }
+    100%{
+        transform: scale(1.0);
+    }
+}
+@keyframes expand{
+    0%{
+        transform: scale(3.0);
     }
     100%{
         transform: scale(1.0);
@@ -25,8 +38,34 @@
         transform: rotate(360deg);
     }
 }
+@keyframes blink{
+    0%{opacity: 1}
+    50%{opacity: 0}
+    100%{opacity: 1}
+}
 
 
+/* vue animation class */
+.blink-transition-enter-active{
+    animation: blink 0.06s 0.3s 3 forwards;
+    transition: all 0.3s 0.3s;
+}
+.blink-transition-leave-active{
+    transition: all 0.2s 0.3s;
+}
+.blink-transition-enter{
+    opacity: 0;
+    /* transform: translate(-10%, 0px) scale(1.0); */
+    transform: scale(0.925);
+}
+.blink-transition-leave-to{
+    opacity: 0;
+    /* transform: translate(10%, 0px) scale(0.75); */
+    transform: scale(1.075);
+}
+
+
+/* init */
 *{
     margin: 0;
     padding: 0;
@@ -58,6 +97,7 @@ div.opening{
     transform: translate(-50%, -50%);
     width: 25vmin;
     height: 25vmin;
+    color: white;
 }
 
 /* opening circle */
@@ -85,5 +125,25 @@ div.opening-circle{
     height: 100%;
     background: white;
     border-radius: 50%;
-    transform: scale(1.0);
+    transition: 0.3s;
+}
+
+/* openint text */
+div.opening-text-container{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    font-family: ENORBITB;
+    user-select: none;
+}
+div.opening-text-animation{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+div.opening-text-center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
