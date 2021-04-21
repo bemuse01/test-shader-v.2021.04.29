@@ -7,6 +7,7 @@ OPENING.element.text.build = class{
 
     // init
     init(circle){
+        this.param = new OPENING.element.text.param()
         this.loading = 0
         this.play = true
         this.circle = circle
@@ -45,7 +46,7 @@ OPENING.element.text.build = class{
             return
         }
 
-        this.loading += 0.8
+        this.loading += this.param.step
         if(this.loading > 100) this.loading = 100
 
         let text = `${this.loading.toFixed(0)}%`, len = text.length
@@ -59,7 +60,7 @@ OPENING.element.text.build = class{
     after(){
         this.play = false
         this.slide()
-        this.circle.remove()
+        this.circle.stop()
     }
     // slide
     slide(){

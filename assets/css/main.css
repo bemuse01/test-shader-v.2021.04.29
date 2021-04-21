@@ -6,30 +6,6 @@
 
 
 /* animation */
-@keyframes fadein{
-    0%{
-        opacity: 0;
-    }
-    100%{
-        opacity: 1.0;
-    }
-}
-@keyframes scale{
-    0%{
-        transform: scale(3.0);
-    }
-    100%{
-        transform: scale(1.0);
-    }
-}
-@keyframes expand{
-    0%{
-        transform: scale(3.0);
-    }
-    100%{
-        transform: scale(1.0);
-    }
-}
 @keyframes rotate{
     0%{
         transform: rotate(0deg);
@@ -86,64 +62,4 @@ canvas#canvas{
     position: absolute;
     top: 0;
     left: 0;
-}
-
-
-/* opening */
-div.opening{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 25vmin;
-    height: 25vmin;
-    color: white;
-}
-
-/* opening circle */
-div.opening-circle-container{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    animation: rotate 240s linear infinite;
-}
-div.opening-circle-center{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 1%;
-    height: 1%;
-    /* opacity: 0; */
-}
-div.opening-circle-translate{
-    width: 100%;
-    height: 100%;
-}
-div.opening-circle{
-    width: 100%;
-    height: 100%;
-    background: white;
-    border-radius: 50%;
-    transition: 0.3s;
-}
-
-/* openint text */
-div.opening-text-container{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    font-family: ENORBITB;
-    user-select: none;
-}
-div.opening-text-animation{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-div.opening-text-center{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
 }

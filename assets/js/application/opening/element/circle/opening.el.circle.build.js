@@ -47,17 +47,6 @@ OPENING.element.circle.build = class{
     }
 
 
-    // remove animation
-    remove(){
-        // don't use foreach or for(index) to modify array in vue
-        this.play = false
-        this.arr.forEach(e => {
-            e.style.none.transform = 'scale(1.0)'
-            e.style.none.transition = '0.5s'
-        })
-    }
-
-
     // resize
     resize(size){
         this.size = size
@@ -70,9 +59,8 @@ OPENING.element.circle.build = class{
     animate(){
         if(!this.play) return
 
-        this.index = (this.index + 0.6) % this.param.count
+        this.index = (this.index + this.param.step) % this.param.count
         const index = parseInt(this.index)
-
 
         // don't use foreach or for(index) to modify array in vue
         this.arr.forEach((e, i) => {
@@ -83,6 +71,17 @@ OPENING.element.circle.build = class{
                 e.style.none.transform = 'scale(1.0)'
                 e.style.none.transition = '1.0s'
             }
+        })
+    }
+
+    
+    // stop animate
+    stop(){
+        // don't use foreach or for(index) to modify array in vue
+        this.play = false
+        this.arr.forEach(e => {
+            e.style.none.transform = 'scale(1.0)'
+            e.style.none.transition = '0.5s'
         })
     }
 
