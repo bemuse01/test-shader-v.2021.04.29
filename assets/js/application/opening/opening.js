@@ -1,6 +1,7 @@
 const OPENING = {
     element: {
         circle: {},
-        text: {}
+        text: {},
+        particle: {}
     }
 }

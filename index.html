@@ -8,12 +8,14 @@
         <meta name="description" content="This is desktop web wallpaper for using Wallpaper Engine users, not for mobile device users.">
         <meta name="author" content="Bemuse">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <meta charset="utf-8">
 
 
         <!-- lib -->
         <script src="assets/js/lib/vue.min.js"></script>
         <script src="assets/js/lib/three.min.r126.js"></script>
         <script src="assets/js/lib/simplex-noise.2.3.0.min.js"></script>
+        <script src="assets/js/lib/tween.umd.js"></script>
         <!-- <script src="assets/js/lib/GPUComputationRenderer.js"></script> -->
     
         
@@ -43,6 +45,9 @@
         <!-- opening element circle -->
         <script src="assets/js/application/opening/element/circle/opening.el.circle.param.js"></script>
         <script src="assets/js/application/opening/element/circle/opening.el.circle.build.js"></script>
+        <!-- opening element particle -->
+        <script src="assets/js/application/opening/element/particle/opening.el.particle.param.js"></script>
+        <script src="assets/js/application/opening/element/particle/opening.el.particle.build.js"></script>
         <!-- opening element build -->
         <script src="assets/js/application/opening/element/opening.el.build.js"></script>
 
@@ -93,6 +98,16 @@
                             </div>
                         </div>
                     </transition-group>
+                    <div class="opening-particle-container">
+                        <div class="opening-particle-center"
+                            v-for="i in element.opening.group.particle.get()"
+                            :key="i.key"
+                        >
+                            <div class="opening-particle-translate" :style="i.style.translate">
+                                <div class="opening-particle" :style="i.style.none"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
 

@@ -12,7 +12,8 @@ OPENING.element.build = class{
         
         this.group = {
             circle: null,
-            text: null
+            text: null,
+            particle: null
         }
     }
 
@@ -21,6 +22,7 @@ OPENING.element.build = class{
     create(){
         this.createCircle()
         this.createText()
+        this.createParticle()
     }
     createCircle(){
         this.group.circle = new OPENING.element.circle.build(this.size)
@@ -28,7 +30,9 @@ OPENING.element.build = class{
     createText(){
         this.group.text = new OPENING.element.text.build(this.group.circle)
     }
-
+    createParticle(){
+        this.group.particle = new OPENING.element.particle.build(this.size, this.group.text)
+    }
 
 
     // resize
@@ -37,7 +41,7 @@ OPENING.element.build = class{
         this.size = element.getBoundingClientRect().width
 
         for(let i in this.group) {
-            if(!this.group[i].resize) continue
+            if(!this.group[i] || !this.group[i].resize) continue
             this.group[i].resize(this.size)
         }
     }
@@ -46,7 +50,7 @@ OPENING.element.build = class{
     // animate
     animate(){
         for(let i in this.group) {
-            if(!this.group[i].animate) continue
+            if(!this.group[i] || !this.group[i].animate) continue
             this.group[i].animate()
         }
     }

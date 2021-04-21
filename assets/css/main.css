@@ -1,7 +1,11 @@
 /* font */
-@font-face {
+@font-face{
     font-family: ENORBITB;
     src: url('../font/ENORBITB.TTF');
+}
+@font-face{
+    font-family: VCR_OSD_MONO;
+    src: url('../font/VCR_OSD_MONO.ttf');
 }
 
 
