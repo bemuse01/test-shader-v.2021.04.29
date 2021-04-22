@@ -1,16 +1,20 @@
 OPENING.element.particle.build = class{
-    constructor(size, text){
-        this.init(size, text)
+    constructor(size){
+        this.init(size)
         this.create()
+        this.createTween()
     }
 
 
     // init
-    init(size, text){
+    init(size){
         this.param = new OPENING.element.particle.param()
         this.size = size
-        this.text = text
+        this.container = true
         this.play = true
+        this.tw = []
+        this.next = false
+        this.staticSize = size
     }
 
 
@@ -38,7 +42,10 @@ OPENING.element.particle.build = class{
                 },
                 style: {
                     translate: {
-                        transform: `translate(${x}px, ${y}px) rotate(${rotate}deg)`
+                        transform: `translate(${x}px, ${y}px)`
+                    },
+                    rotate: {
+                        transform: `rotate(${rotate}deg)`
                     },
                     none: {
                         transform: `scale(${scale})`,
@@ -53,58 +60,79 @@ OPENING.element.particle.build = class{
 
     // create tween
     createTween(){
+        const easing = BezierEasing(...this.param.easing)
+
         this.arr.forEach((e, i) => {
             const {x, y, deg, rotate, radius} = e.param
-
-            const nx = Math.cos(deg * RADIAN) * radius * 2
-            const ny = Math.sin(deg * RADIAN) * radius * 2
+            const rand = Math.random() * 1 + 1.5
+            const nx = Math.cos(deg * RADIAN) * radius * rand
+            const ny = Math.sin(deg * RADIAN) * radius * rand
 
             const start = {
                 opacity: 0,
                 x: x,
                 y: y,
-                rotate: rotate
+                rot: rotate
             }
             const end = {
-                opacity: [0, 0.25, 0.5, 1, 1, 0.5, 0],
+                opacity: [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0.8, 0.6, 0.4, 0.2, 0],
                 x: nx,
                 y: ny,
-                rotate: rotate + 360
+                rot: rotate + 360
             }
 
-            const tw = new TWEEN.Tween(start)
-            .to(end, 1500)
-            // .easing(TWEEN.Easing.Quintic.Out)
-            .easing(TWEEN.Easing.Circular.Out)
+            this.tw[i] = new TWEEN.Tween(start)
+            .to(end, 2500)
+            .easing(easing)
             .onUpdate(() => this.updateTween(i, start))
-            .delay(300)
-            .start()
+            .onComplete(() => this.completeTween(i))
         })
     }
-    updateTween(i, {x, y, rotate, opacity}){
+    updateTween(i, {x, y, rot, opacity}){
         // don't use foreach or for(index) to modify array in vue
         const translate = this.arr[i].style.translate
+        const rotate = this.arr[i].style.rotate
         const none = this.arr[i].style.none
 
-        translate.transform = `translate(${x}px, ${y}px) rotate(${rotate}deg)`
+        translate.transform = `translate(${x}px, ${y}px)`
+        rotate.transform = `rotate(${rot}deg)`
         none.opacity = opacity
+    }
+    completeTween(i){
+        if(i === 0) this.after()
+    }
+    startTween(){
+        this.tw.forEach(e => {
+            e.start()
+        })
     }
 
 
     // resize
-    resize(){
+    resize(size){
         // don't use foreach or for(index) to modify array in vue
+        this.size = size
     }
 
 
     // animate
-    animate(){
+    animate({text, circle}){
         if(!this.play) return
 
-        if(this.text.loading >= 100){
-            this.createTween()
+        if(text.next){
+            text.destroy()
+            circle.destroy()
+            this.startTween()
             this.play = false
         }
+    }
+
+
+    // after
+    after(){
+        TWEEN.removeAll()
+        this.tw = []
+        this.container = false
     }
 
 

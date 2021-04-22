@@ -1,16 +1,17 @@
 OPENING.element.text.build = class{
-    constructor(circle){
-        this.init(circle)
+    constructor(){
+        this.init()
         this.create()
     }
 
 
     // init
-    init(circle){
+    init(){
         this.param = new OPENING.element.text.param()
         this.loading = 0
         this.play = true
-        this.circle = circle
+        this.container = true
+        this.next = false
     }
 
 
@@ -38,11 +39,11 @@ OPENING.element.text.build = class{
 
 
     // animate
-    animate(){
+    animate({circle}){
         if(!this.play) return 
 
         if(this.loading >= 100) {
-            this.after()
+            this.after(circle)
             return
         }
 
@@ -57,10 +58,11 @@ OPENING.element.text.build = class{
 
 
     // after loading
-    after(){
+    after(circle){
         this.play = false
+        circle.stop()
         this.slide()
-        this.circle.stop()
+        setTimeout(() => this.next = true, this.param.next)
     }
     // slide
     slide(){
@@ -72,6 +74,12 @@ OPENING.element.text.build = class{
 
         this.arr.push(first)
     }
+
+
+    // destroy
+    destroy(){
+        this.container = false
+    } 
 
 
     // get

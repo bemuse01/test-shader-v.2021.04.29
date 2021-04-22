@@ -11,6 +11,7 @@ OPENING.element.circle.build = class{
         this.size = size
         this.index = 0
         this.play = true
+        this.container = true
     }
 
 
@@ -84,6 +85,12 @@ OPENING.element.circle.build = class{
             e.style.none.transition = '0.5s'
         })
     }
+
+    
+    // destroy
+    destroy(){
+        this.container = false
+    } 
 
 
     // get

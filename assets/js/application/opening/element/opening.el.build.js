@@ -28,10 +28,10 @@ OPENING.element.build = class{
         this.group.circle = new OPENING.element.circle.build(this.size)
     }
     createText(){
-        this.group.text = new OPENING.element.text.build(this.group.circle)
+        this.group.text = new OPENING.element.text.build()
     }
     createParticle(){
-        this.group.particle = new OPENING.element.particle.build(this.size, this.group.text)
+        this.group.particle = new OPENING.element.particle.build(this.size)
     }
 
 
@@ -51,7 +51,7 @@ OPENING.element.build = class{
     animate(){
         for(let i in this.group) {
             if(!this.group[i] || !this.group[i].animate) continue
-            this.group[i].animate()
+            this.group[i].animate(this.group)
         }
     }
 }

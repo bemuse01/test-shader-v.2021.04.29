@@ -3,12 +3,19 @@
 <html>
     <head>
         <!-- <b><em><u><s>e</s></u></em></b> -->
-
-
         <meta name="description" content="This is desktop web wallpaper for using Wallpaper Engine users, not for mobile device users.">
         <meta name="author" content="Bemuse">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
         <meta charset="utf-8">
+
+
+        <!-- style -->
+
+        <!-- style main -->
+        <link href="assets/css/main.css" rel="stylesheet" type="text/css">
+
+        <!-- style opening -->
+        <link href="assets/css/opening.css" rel="stylesheet" type="text/css">
 
 
         <!-- lib -->
@@ -16,6 +23,7 @@
         <script src="assets/js/lib/three.min.r126.js"></script>
         <script src="assets/js/lib/simplex-noise.2.3.0.min.js"></script>
         <script src="assets/js/lib/tween.umd.js"></script>
+        <script src="assets/js/lib/bezier.js"></script>
         <!-- <script src="assets/js/lib/GPUComputationRenderer.js"></script> -->
     
         
@@ -50,15 +58,6 @@
         <script src="assets/js/application/opening/element/particle/opening.el.particle.build.js"></script>
         <!-- opening element build -->
         <script src="assets/js/application/opening/element/opening.el.build.js"></script>
-
-
-        <!-- style -->
-
-        <!-- style main -->
-        <link href="assets/css/main.css" rel="stylesheet" type="text/css">
-
-        <!-- style opening -->
-        <link href="assets/css/opening.css" rel="stylesheet" type="text/css">
     </head>
     <body>
         <div id="wrap">
@@ -76,8 +75,12 @@
 
                 <!-- opening -->
                 <div class="ui opening">
-                    <div class="opening-circle-container">
-                        <div class="opening-circle-center"
+                    <div 
+                        class="opening-circle-container" 
+                        v-if="element.opening.group.circle.container"
+                    >
+                        <div 
+                            class="opening-circle-center"
                             v-for="i in element.opening.group.circle.get()"
                             :key="i.key"
                         >
@@ -86,8 +89,14 @@
                             </div>
                         </div>
                     </div>
-                    <transition-group name="blink-transition" tag="div" class="opening-text-container">
-                        <div class="opening-text-animation"
+                    <transition-group 
+                        name="blink-transition" 
+                        tag="div" 
+                        class="opening-text-container"
+                        v-if="element.opening.group.circle.container"
+                    >
+                        <div 
+                            class="opening-text-animation"
                             v-for="i in element.opening.group.text.get()"
                             v-show="i.show"
                             :key="i.key"
@@ -98,13 +107,19 @@
                             </div>
                         </div>
                     </transition-group>
-                    <div class="opening-particle-container">
-                        <div class="opening-particle-center"
+                    <div 
+                        class="opening-particle-container"
+                        v-if="element.opening.group.particle.container"
+                    >
+                        <div 
+                            class="opening-particle-center"
                             v-for="i in element.opening.group.particle.get()"
                             :key="i.key"
                         >
                             <div class="opening-particle-translate" :style="i.style.translate">
-                                <div class="opening-particle" :style="i.style.none"></div>
+                                <div class="opening-particle-rotate" :style="i.style.rotate">
+                                    <div class="opening-particle" :style="i.style.none"></div>
+                                </div>
                             </div>
                         </div>
                     </div>

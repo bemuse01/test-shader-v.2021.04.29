@@ -3,5 +3,8 @@ const OPENING = {
         circle: {},
         text: {},
         particle: {}
+    },
+    object: {
+        particle: {}
     }
 }
