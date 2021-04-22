@@ -14,7 +14,6 @@ OPENING.element.particle.build = class{
         this.play = true
         this.tw = []
         this.next = false
-        this.staticSize = size
     }
 
 
@@ -111,7 +110,6 @@ OPENING.element.particle.build = class{
     // resize
     resize(size){
         // don't use foreach or for(index) to modify array in vue
-        this.size = size
     }
 
 
@@ -133,6 +131,7 @@ OPENING.element.particle.build = class{
         TWEEN.removeAll()
         this.tw = []
         this.container = false
+        setTimeout(() => this.next = true, this.param.next)
     }
 
 
