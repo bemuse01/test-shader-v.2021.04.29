@@ -38,6 +38,7 @@ new Vue({
             for(let i in OBJECT) OBJECT[i].animate({app})
         },
         createObject(app){
+            OBJECT.background = new BG.object.build(app)
         },
 
 

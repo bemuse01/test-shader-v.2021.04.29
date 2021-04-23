@@ -1,0 +1,5 @@
+const BG = {
+    object: {
+        child: {}
+    }
+}
