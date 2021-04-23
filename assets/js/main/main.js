@@ -3,7 +3,8 @@ new Vue({
     data(){
         return{
             element: {
-                opening: new OPENING.element.build()
+                opening: new OPENING.element.build(),
+                logo: new LOGO.element.build()
             }
         }
     },
@@ -50,7 +51,7 @@ new Vue({
         animateElement(){
             for(let i in this.element){
                 if(!this.element[i].animate) continue
-                this.element[i].animate()
+                this.element[i].animate(this.element.opening)
             }
         },
 

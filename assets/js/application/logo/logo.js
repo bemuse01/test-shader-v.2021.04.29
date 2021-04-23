@@ -1,3 +1,5 @@
 const LOGO = {
-    
+    element: {
+        text: {}
+    }
 }

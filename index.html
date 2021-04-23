@@ -3,7 +3,7 @@
 <html>
     <head>
         <!-- <b><em><u><s>e</s></u></em></b> -->
-        <meta name="description" content="This is desktop web wallpaper for using Wallpaper Engine users, not for mobile device users.">
+        <meta name="description" content="This is desktop web wallpaper for Wallpaper Engine users, not mobile device users.">
         <meta name="author" content="Bemuse">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
         <meta charset="utf-8">
@@ -11,11 +11,14 @@
 
         <!-- style -->
 
-        <!-- style main -->
-        <link href="assets/css/main.css" rel="stylesheet" type="text/css">
+        <!-- style init -->
+        <link href="assets/css/init.css" rel="stylesheet" type="text/css">
 
         <!-- style opening -->
         <link href="assets/css/opening.css" rel="stylesheet" type="text/css">
+
+        <!-- style logo -->
+        <link href="assets/css/logo.css" rel="stylesheet" type="text/css">
 
 
         <!-- lib -->
@@ -58,6 +61,14 @@
         <script src="assets/js/application/opening/element/particle/opening.el.particle.build.js"></script>
         <!-- opening element build -->
         <script src="assets/js/application/opening/element/opening.el.build.js"></script>
+
+        <!-- logo -->
+        <script src="assets/js/application/logo/logo.js"></script>
+        <!-- logo element text -->
+        <script src="assets/js/application/logo/element/text/logo.el.text.param.js"></script>
+        <script src="assets/js/application/logo/element/text/logo.el.text.build.js"></script>
+        <!-- logo element build -->
+        <script src="assets/js/application/logo/element/logo.el.build.js"></script>
     </head>
     <body>
         <div id="wrap">
@@ -121,6 +132,20 @@
                                     <div class="opening-particle" :style="i.style.none"></div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- logo -->
+                <div class="ui logo">
+                    <div class="logo-text-container">
+                        <div
+                            class="logo-text"
+                            v-for="i in element.logo.group.text.get()"
+                            :key="i.key"
+                            :style="i.style"
+                        ><span>{{i.text}}</span>
                         </div>
                     </div>
                 </div>
