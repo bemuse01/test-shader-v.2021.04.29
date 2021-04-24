@@ -15,5 +15,15 @@ const METHOD = {
     },
     clamp(x, min, max){
         return x <= min ? min : x >= max ? max : x
+    },
+    shuffle(arr){
+        const temp = [...arr]
+        for (let i = temp.length - 1; i > 0; i--){
+            const j = Math.floor(Math.random() * (i + 1))
+            const t = temp[i]
+            temp[i] = temp[j]
+            temp[j] = t
+        }
+        return temp
     }
 }

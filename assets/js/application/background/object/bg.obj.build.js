@@ -59,10 +59,10 @@ BG.object.build = class{
 
     // create
     create({renderer}){
-        this.createChild()
+        this.createChild(renderer)
     }
-    createChild(){
-        this.comp.child = new BG.object.child.build(this.group.child, this.size)
+    createChild(renderer){
+        this.comp.child = new BG.object.child.build(this.group.child, this.size, renderer)
     }
 
 

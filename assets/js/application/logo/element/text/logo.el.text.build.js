@@ -24,7 +24,7 @@ LOGO.element.text.build = class{
                 style: {
                     opacity: '0',
                     // transform: 'translate(75%, 0)',
-                    transition: `0.3s ${i * 0.05}s`
+                    transition: `opacity 0.3s ${i * 0.05}s`
                 }
             })
         })

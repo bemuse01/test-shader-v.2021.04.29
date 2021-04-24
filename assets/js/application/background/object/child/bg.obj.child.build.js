@@ -1,15 +1,50 @@
 BG.object.child.build = class{
-    constructor(group, size){
-        this.init(size)
+    constructor(group, size, renderer){
+        this.init(size, renderer)
         this.create()
         this.add(group)
     }
 
 
     // init
-    init(size){
+    init(size, renderer){
         this.param = new BG.object.child.param()
         this.size = size
+        this.oldTime = window.performance.now()
+        this.renderer = renderer
+
+        this.initTexture()
+    }
+    initTexture(){
+        this.gpuCompute = new THREE.GPUComputationRenderer(this.size.el.w, this.size.el.h, this.renderer)
+
+        const delay = this.gpuCompute.createTexture()
+        const map = this.gpuCompute.createTexture()
+
+        BG.object.child.method.fillTexture(delay, this.size.obj)
+        BG.object.child.method.fillMapTexture(map, this.size.obj)
+
+        this.delayVariable = this.gpuCompute.addVariable('delay', BG.object.child.shader.delay.fragment, delay)
+        this.mapVariable = this.gpuCompute.addVariable('map', BG.object.child.shader.map.fragment, map)
+
+        this.gpuCompute.setVariableDependencies(this.delayVariable, [this.delayVariable, this.mapVariable])
+        this.gpuCompute.setVariableDependencies(this.mapVariable, [this.mapVariable])
+
+        this.delayUniforms = this.delayVariable.material.uniforms
+        this.mapUniforms = this.mapVariable.material.uniforms
+
+        this.delayUniforms['rand'] = {value: 0.0}
+        this.delayUniforms['rand2'] = {value: 0.0}
+        this.delayUniforms['currentTime'] = {value: 0.0}
+
+        this.mapUniforms['rand'] = {value: 0.0}
+        this.mapUniforms['rand2'] = {value: 0.0}
+        this.mapUniforms['oldTime'] = {value: 0.0}
+        this.mapUniforms['currentTime'] = {value: 0.0}
+        this.mapUniforms['width'] = {value: this.size.el.w}
+        this.mapUniforms['height'] = {value: this.size.el.h}
+
+        this.gpuCompute.init()
     }
 
 
@@ -33,6 +68,7 @@ BG.object.child.build = class{
     }
     createMaterial(){
         const texture = new THREE.TextureLoader().load('assets/src/bg.png')
+        const delay = BG.object.child.method.createTexture(this.size.el)
 
         return new THREE.ShaderMaterial({
             vertexShader: BG.object.child.shader.draw.vertex,
@@ -40,7 +76,9 @@ BG.object.child.build = class{
             transparent: true,
             uniforms: {
                 u_color: {value: new THREE.Color(this.param.color)},
-                u_bg: {value: texture}
+                u_bg: {value: texture},
+                u_delay: {value: null},
+                time: {value: 0}
             }
         })
     }
@@ -57,6 +95,21 @@ BG.object.child.build = class{
 
     // animate
     animate(){
+        const currentTime = window.performance.now()
+        
+        // this.mesh.material.uniforms['time'].value = 
 
+        this.gpuCompute.compute()
+
+        this.delayUniforms['rand'].value = Math.random()
+        this.delayUniforms['rand2'].value = Math.floor(Math.random() * this.size.el.w)
+        this.delayUniforms['currentTime'].value = currentTime
+
+        this.mapUniforms['rand'].value = Math.random()
+        this.mapUniforms['rand2'].value = Math.floor(Math.random() * this.size.el.w)
+        this.mapUniforms['oldTime'].value = currentTime
+        this.mapUniforms['currentTime'].value = currentTime
+
+        this.mesh.material.uniforms['u_delay'].value = this.gpuCompute.getCurrentRenderTarget(this.delayVariable).texture
     }
 }
