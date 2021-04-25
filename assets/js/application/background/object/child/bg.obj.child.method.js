@@ -41,12 +41,11 @@ BG.object.child.method = {
         const {data, width, height} = texture.image
         
         for(let j = 0; j < width; j++){
-            const rand = Math.random() * 1000
             for(let i = 0; i < height; i++){
                 const index = (i * width + j) * 4
 
                 // x === play time
-                data[index] = 1000 + i
+                data[index] = 1000 + height - i
 
                 // y === update old time
                 data[index + 1] = 0

@@ -39,7 +39,7 @@ BG.object.child.shader = {
                 
                 if(m.x < currentTime - m.y && m.z == 1.0) d.x = 1.0;
 
-                d.x = clamp(d.x - d.y, 0.4, 1.0);
+                d.x = clamp(d.x - d.y, 0.3, 1.0);
 
                 gl_FragColor = d;
             }
@@ -72,11 +72,3 @@ BG.object.child.shader = {
         `
     }
 }
-
-
-
-// make to play
-// if(rand2 > 0.975) d.z = 1.0;
-
-// float dist = distance(uv.x, rand);
-// if(dist < pixel.x * 0.2 && uv.y >= 1.0 - pixel.y) d.w = 1.0;
