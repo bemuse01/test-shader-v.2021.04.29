@@ -38,8 +38,8 @@ LOGO.element.build = class{
 
 
     // animate
-    animate({group}){
-        const {next} = group.particle
+    animate({opening}){
+        const {next} = opening.group.particle
 
         for(let i in this.group){
             if(!this.group[i] || !this.group[i].animate) continue

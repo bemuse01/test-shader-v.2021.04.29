@@ -23,8 +23,8 @@ BG.element.build = class{
 
 
     // animate
-    animate({group}){
-        const {next} = group.particle
+    animate({logo}){
+        const {next} = logo.group.text
 
         this.group.cover.animate(next)
     }

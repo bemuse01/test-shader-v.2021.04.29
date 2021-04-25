@@ -40,8 +40,17 @@ LOGO.element.text.build = class{
                 e.style.opacity = '1'
                 // e.style.transform = 'translate(0, 0)'
             })
+            this.after()
             this.play = false
         }
+    }
+
+
+    // after
+    after(){
+        const delay = this.arr.length * 50 + 300 + 500
+
+        setTimeout(e => this.next = true, delay)
     }
 
 

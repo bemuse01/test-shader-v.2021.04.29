@@ -35,9 +35,9 @@ new Vue({
         },
         renderThree(){
             const {app} = OBJECT
-            const {group} = this.element.opening
+            const element = this.element
             
-            for(let i in OBJECT) OBJECT[i].animate({app, group})
+            for(let i in OBJECT) OBJECT[i].animate({app, element})
         },
         createObject(app){
             OBJECT.background = new BG.object.build(app)
@@ -54,7 +54,7 @@ new Vue({
         animateElement(){
             for(let i in this.element){
                 if(!this.element[i].animate) continue
-                this.element[i].animate(this.element.opening)
+                this.element[i].animate(this.element)
             }
         },
 
