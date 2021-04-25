@@ -4,7 +4,8 @@ new Vue({
         return{
             element: {
                 opening: new OPENING.element.build(),
-                logo: new LOGO.element.build()
+                logo: new LOGO.element.build(),
+                background: new BG.element.build()
             }
         }
     },
@@ -34,8 +35,9 @@ new Vue({
         },
         renderThree(){
             const {app} = OBJECT
+            const {group} = this.element.opening
             
-            for(let i in OBJECT) OBJECT[i].animate({app})
+            for(let i in OBJECT) OBJECT[i].animate({app, group})
         },
         createObject(app){
             OBJECT.background = new BG.object.build(app)

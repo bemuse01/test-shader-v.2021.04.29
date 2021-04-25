@@ -16,7 +16,7 @@ BG.object.child.build = class{
         this.initTexture()
     }
     initTexture(){
-        this.gpuCompute = new THREE.GPUComputationRenderer(this.size.el.w, this.size.el.h, this.renderer)
+        this.gpuCompute = new THREE.GPUComputationRenderer(this.size.el.w / 2, this.size.el.h / 2, this.renderer)
 
         const delay = this.gpuCompute.createTexture()
         const map = this.gpuCompute.createTexture()
@@ -33,16 +33,14 @@ BG.object.child.build = class{
         this.delayUniforms = this.delayVariable.material.uniforms
         this.mapUniforms = this.mapVariable.material.uniforms
 
-        this.delayUniforms['rand'] = {value: 0.0}
-        this.delayUniforms['rand2'] = {value: 0.0}
         this.delayUniforms['currentTime'] = {value: 0.0}
+        this.delayUniforms['oMin'] = {value: this.param.opacity.min}
+        this.delayUniforms['oMax'] = {value: this.param.opacity.max}
 
         this.mapUniforms['rand'] = {value: 0.0}
-        this.mapUniforms['rand2'] = {value: 0.0}
         this.mapUniforms['oldTime'] = {value: 0.0}
         this.mapUniforms['currentTime'] = {value: 0.0}
-        this.mapUniforms['width'] = {value: this.size.el.w}
-        this.mapUniforms['height'] = {value: this.size.el.h}
+        this.mapUniforms['play'] = {value: false}
 
         this.gpuCompute.init()
     }
@@ -68,7 +66,6 @@ BG.object.child.build = class{
     }
     createMaterial(){
         const texture = new THREE.TextureLoader().load('assets/src/bg.png')
-        const delay = BG.object.child.method.createTexture(this.size.el)
 
         return new THREE.ShaderMaterial({
             vertexShader: BG.object.child.shader.draw.vertex,
@@ -90,25 +87,23 @@ BG.object.child.build = class{
 
         this.mesh.geometry.dispose()
         this.mesh.geometry = this.createGeometry()
+
+        this.initTexture()
     }
 
 
     // animate
-    animate(){
+    animate(next){
         const currentTime = window.performance.now()
-        
-        // this.mesh.material.uniforms['time'].value = 
 
         this.gpuCompute.compute()
 
-        this.delayUniforms['rand'].value = Math.random()
-        this.delayUniforms['rand2'].value = Math.floor(Math.random() * this.size.el.w)
         this.delayUniforms['currentTime'].value = currentTime
 
-        this.mapUniforms['rand'].value = Math.random()
-        this.mapUniforms['rand2'].value = Math.floor(Math.random() * this.size.el.w)
+        this.mapUniforms['rand'].value = Math.floor(Math.random() * this.size.el.w)
         this.mapUniforms['oldTime'].value = currentTime
         this.mapUniforms['currentTime'].value = currentTime
+        this.mapUniforms['play'].value = next
 
         this.mesh.material.uniforms['u_delay'].value = this.gpuCompute.getCurrentRenderTarget(this.delayVariable).texture
     }

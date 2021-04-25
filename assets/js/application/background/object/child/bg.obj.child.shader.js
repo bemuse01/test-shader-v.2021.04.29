@@ -25,21 +25,19 @@ BG.object.child.shader = {
     },
     delay: {
         fragment: `
-            uniform float rand;
-            uniform int rand2;
             uniform float currentTime;
+            uniform float oMin;
+            uniform float oMax;
 
             void main(){
                 ivec2 xy = ivec2(gl_FragCoord.xy);
 
                 vec4 d = texelFetch(delay, xy, 0);
                 vec4 m = texelFetch(map, xy, 0);
-
-                // if(xy.x == rand2) d.x = 1.0;
                 
-                if(m.x < currentTime - m.y && m.z == 1.0) d.x = 1.0;
+                if(m.x < currentTime - m.y && m.z == 1.0) d.x = oMax;
 
-                d.x = clamp(d.x - d.y, 0.3, 1.0);
+                d.x = clamp(d.x - d.y, oMin, oMax);
 
                 gl_FragColor = d;
             }
@@ -47,20 +45,17 @@ BG.object.child.shader = {
     },
     map: {
         fragment: `
-            uniform float rand;
-            uniform int rand2;
-            uniform float currentTime;
+            uniform int rand;
             uniform float oldTime;
-            uniform int width;
-            uniform int height;
+            uniform float currentTime;
+            uniform bool play;
 
             void main(){
                 ivec2 xy = ivec2(gl_FragCoord.xy);
 
                 vec4 m = texelFetch(map, xy, 0);
 
-                // if(rand2 == xy.x || rand2 == xy.x - 1){
-                if(rand2 == xy.x){
+                if(rand == xy.x && play == true){
                     m.y = oldTime;
                     m.z = 1.0;
                 }

@@ -83,6 +83,11 @@
         <!-- background object build -->
         <script src="assets/js/application/background/object/bg.obj.param.js"></script>
         <script src="assets/js/application/background/object/bg.obj.build.js"></script>
+
+        <!-- background element cover -->
+        <script src="assets/js/application/background/element/cover/bg.el.cover.build.js"></script>
+        <!-- background element build -->
+        <script src="assets/js/application/background/element/bg.el.build.js"></script>
     </head>
     <body>
         <div id="wrap">
@@ -102,6 +107,9 @@
                 <div class="ui background">
                     <div class="background-object-container">
                         <div class="background-object"></div>
+                    </div>
+                    <div class="background-cover-container">
+                        <div class="background-cover" :style="element.background.group.cover.get()"></div>
                     </div>
                 </div>
 

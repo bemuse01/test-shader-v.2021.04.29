@@ -67,9 +67,9 @@ BG.object.build = class{
 
 
     // animate
-    animate({app}){
+    animate({app, group}){
         this.render(app)
-        this.animateObject()
+        this.animateObject(group)
     }
     render(app){
         const rect = this.element.getBoundingClientRect()
@@ -85,10 +85,12 @@ BG.object.build = class{
         app.renderer.render(this.scene, this.camera)
 
     }
-    animateObject(){
+    animateObject({particle}){
+        const {next} = particle
+
         for(let i in this.comp){
             if(!this.comp[i] || !this.comp[i].animate) continue
-            this.comp[i].animate()
+            this.comp[i].animate(next)
         }
     }
 
