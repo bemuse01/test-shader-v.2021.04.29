@@ -20,6 +20,7 @@ div.logo-text-container{
     user-select: none;
     font-family: ENORBITB;
     display: flex;
+    text-shadow: 0px 0px 4px white;
 }
 div.logo-text{
     width: auto;

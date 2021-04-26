@@ -50,7 +50,7 @@ LOGO.element.text.build = class{
     after(){
         const delay = this.arr.length * 50 + 300 + 500
 
-        setTimeout(e => this.next = true, delay)
+        setTimeout(() => this.next = true, delay)
     }
 
 

@@ -14,7 +14,7 @@
         <!-- style init -->
         <link href="assets/css/init.css" rel="stylesheet" type="text/css">
 
-        <!-- style opening -->
+        <!-- style background -->
         <link href="assets/css/background.css" rel="stylesheet" type="text/css">
 
         <!-- style opening -->
@@ -22,6 +22,12 @@
 
         <!-- style logo -->
         <link href="assets/css/logo.css" rel="stylesheet" type="text/css">
+
+        <!-- style piece -->
+        <!-- <link href="assets/css/piece.css" rel="stylesheet" type="text/css"> -->
+
+        <!-- test -->
+        <link href="assets/css/test.css" rel="stylesheet" type="text/css">
 
 
         <!-- lib -->
@@ -75,6 +81,11 @@
 
         <!-- background -->
         <script src="assets/js/application/background/bg.js"></script>
+        <!-- background object particle -->
+        <script src="assets/js/application/background/object/particle/bg.obj.particle.param.js"></script>
+        <script src="assets/js/application/background/object/particle/bg.obj.particle.method.js"></script>
+        <script src="assets/js/application/background/object/particle/bg.obj.particle.shader.js"></script>
+        <script src="assets/js/application/background/object/particle/bg.obj.particle.build.js"></script>
         <!-- background object child -->
         <script src="assets/js/application/background/object/child/bg.obj.child.param.js"></script>
         <script src="assets/js/application/background/object/child/bg.obj.child.method.js"></script>
@@ -83,11 +94,25 @@
         <!-- background object build -->
         <script src="assets/js/application/background/object/bg.obj.param.js"></script>
         <script src="assets/js/application/background/object/bg.obj.build.js"></script>
-
         <!-- background element cover -->
         <script src="assets/js/application/background/element/cover/bg.el.cover.build.js"></script>
         <!-- background element build -->
         <script src="assets/js/application/background/element/bg.el.build.js"></script>
+
+        <!-- piece -->
+        <script src="assets/js/application/piece/piece.js"></script>
+        <!-- piece element outer -->
+        <script src="assets/js/application/piece/element/outer/piece.el.outer.param.js"></script>
+        <script src="assets/js/application/piece/element/outer/piece.el.outer.build.js"></script>
+        <!-- piece element build -->
+        <script src="assets/js/application/piece/element/piece.el.build.js"></script>
+
+
+        <!-- test -->
+        <script src="assets/js/application/test/test.js"></script>
+        <script src="assets/js/application/test/child/test.child.build.js"></script>
+        <script src="assets/js/application/test/test.param.js"></script>
+        <script src="assets/js/application/test/test.build.js"></script>
     </head>
     <body>
         <div id="wrap">
@@ -179,6 +204,32 @@
                         </div>
                     </div>
                 </div>
+
+
+                <div class="ui test">
+                    <div class="test-object-container">
+                        <div class="test-object"></div>
+                    </div>
+                </div>
+
+
+                <!-- piece -->
+                <!-- <div class="ui piece">
+                    <div class="piece-outer-container">
+                        <div 
+                            class="piece-outer-center"
+                            v-for="i in element.piece.group.outer.get()"
+                            :key="i.key"
+                        >
+                            <div class="piece-outer-translate" :style="i.style.translate">
+                                <div class="piece-outer" :style="i.style.none">
+                                    <div></div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> -->
 
 
             </div>

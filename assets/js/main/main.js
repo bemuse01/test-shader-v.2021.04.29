@@ -5,7 +5,9 @@ new Vue({
             element: {
                 opening: new OPENING.element.build(),
                 logo: new LOGO.element.build(),
-                background: new BG.element.build()
+                background: new BG.element.build(),
+                // particle: null
+                // piece: new PIECE.element.build()
             }
         }
     },
@@ -40,7 +42,14 @@ new Vue({
             for(let i in OBJECT) OBJECT[i].animate({app, element})
         },
         createObject(app){
+            this.createBackground(app)
+            // this.createTest()
+        },
+        createBackground(app){
             OBJECT.background = new BG.object.build(app)
+        },
+        createTest(){
+            OBJECT.test = new TEST.build()
         },
 
 

@@ -1,33 +1,31 @@
-BG.object.build = class{
-    constructor(app){
+TEST.build = class{
+    constructor(){
         this.init()
-        this.create(app)
+        this.create()
         this.add()
     }
 
 
     // init
     init(){
-        this.param = new BG.object.param()
+        this.param = new TEST.param()
 
         this.initGroup()
         this.initRenderObject()
     }
     initGroup(){
         this.group = {
-            child: new THREE.Group(),
-            particle: new THREE.Group()
+            child: new THREE.Group()
         }
 
         this.comp = {
-            child: null,
-            particle: null
+            child: null
         }
 
         this.build = new THREE.Group
     }
     initRenderObject(){
-        this.element = document.querySelector('.background-object')
+        this.element = document.querySelector('.test-object')
 
         const {width, height} = this.element.getBoundingClientRect()
 
@@ -58,15 +56,11 @@ BG.object.build = class{
 
 
     // create
-    create({renderer}){
-        this.createChild(renderer)
-        this.createParticle()
+    create(){
+        this.createChild()
     }
-    createChild(renderer){
-        this.comp.child = new BG.object.child.build(this.group.child, this.size, renderer)
-    }
-    createParticle(){
-        this.comp.particle = new BG.object.particle.build(this.group.particle, this.size)
+    createChild(){
+        this.comp.child = new TEST.child.build(this.group.child)
     }
 
 

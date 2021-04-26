@@ -1,0 +1,5 @@
+const PIECE = {
+    element: {
+        outer: {}
+    }
+}

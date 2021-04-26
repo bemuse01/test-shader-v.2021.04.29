@@ -3,6 +3,7 @@ const BG = {
         cover: {}
     },
     object: {
-        child: {}
+        child: {},
+        particle: {}
     }
 }

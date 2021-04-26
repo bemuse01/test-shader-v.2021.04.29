@@ -25,8 +25,9 @@ APP.build = class{
         this.renderer = new THREE.WebGLRenderer({antialias: true, alpha: true, canvas: canvas})
         this.renderer.setSize(this.width, this.height)
         this.renderer.setPixelRatio(RATIO)
-        this.renderer.setClearColor(0x000000)
-        this.renderer.setClearAlpha(0.0)
+
+        // this.renderer.setClearColor(0x000000, 0.0)
+        // this.renderer.setClearAlpha(0.0)
     }
 
 
@@ -36,7 +37,7 @@ APP.build = class{
     }
     render(){
         this.renderer.setScissorTest(false)
-        this.renderer.clear()
+        this.renderer.clear(true, true)
         this.renderer.setScissorTest(true)
     }
 

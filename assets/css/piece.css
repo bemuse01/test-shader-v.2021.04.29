@@ -1,0 +1,49 @@
+/* piece */
+div.piece{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90vmax;
+    height: 90vmax;
+}
+
+
+/* piece outer */
+div.piece-outer-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    animation: rotate 1200s linear infinite;
+}
+div.piece-outer-center{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 0.1%;
+    height: 5%;
+}
+div.piece-outer-translate{
+    width: 100%;
+    height: 100%;
+}
+div.piece-outer{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 8%;
+}
+div.piece-outer div:nth-child(1){
+    background: rgba(255, 255, 255, 0.15);
+    flex: 0.15;
+}
+div.piece-outer div:nth-child(2){
+    background: rgba(255, 255, 255, 0.075);
+    flex: 0.85;
+}

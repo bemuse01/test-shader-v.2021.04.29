@@ -1,0 +1,3 @@
+const TEST = {
+    child: {}
+}

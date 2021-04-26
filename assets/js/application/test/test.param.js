@@ -1,4 +1,4 @@
-BG.object.param = class{
+TEST.param = class{
     constructor(){
         this.fov = 60
         this.near = 0.1
