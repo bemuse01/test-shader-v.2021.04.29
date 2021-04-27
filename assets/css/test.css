@@ -3,8 +3,8 @@ div.test{
     position: absolute;
     top: 0;
     left: 0;
-    width: 50vw;
-    height: 50vh;
+    width: 0;
+    height: 0;
 }
 
 

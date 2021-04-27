@@ -38,6 +38,7 @@ BG.object.particle.build = class{
         geometry.setAttribute('size', new THREE.BufferAttribute(size, 1))
 
         geometry.velocity = BG.object.particle.method.createVelocity(this.param)
+        geometry.size = size
 
         return geometry
     }
@@ -65,24 +66,28 @@ BG.object.particle.build = class{
     // animate
     animate(){
         const velocty = this.mesh.geometry.velocity
+        const size = this.mesh.geometry.size
         const position = this.mesh.geometry.attributes.position
         const array = position.array
-        let {w, h} = this.size.obj
-        w = w * 1.05
-        h = h * 1.05
+
+        const {w, h} = this.size.obj
+
+        const hw = w / 2
+        const hh = h / 2
 
         for(let i = 0; i < this.param.count; i++){
             const index = i * 3
+            const s = size[i]
             const {x, y} = velocty[i]
             
             array[index] += x
             array[index + 1] += y
 
-            if(array[index] > w / 2) array[index] = w / -2
-            else if(array[index] < w / -2) array[index] = w / 2
+            if(array[index] > hw + s) array[index] = -(hw + s)
+            else if(array[index] < -(hw + s)) array[index] = hw + s
             
-            if(array[index + 1] > h / 2) array[index + 1] = h / -2
-            else if(array[index + 1] < h / -2) array[index + 1] = h / 2
+            if(array[index + 1] > hh + s) array[index + 1] = -(hh + s)
+            else if(array[index + 1] < -(hh + s)) array[index + 1] = hh + s
         }
 
         position.needsUpdate = true
