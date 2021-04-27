@@ -17,6 +17,7 @@ BG.object.child.build = class{
     }
     initTexture(){
         this.gpuCompute = new THREE.GPUComputationRenderer(this.size.el.w / 2, this.size.el.h / 2, this.renderer)
+        // this.gpuCompute = new THREE.GPUComputationRenderer(this.size.el.w, this.size.el.h, this.renderer)
 
         const delay = this.gpuCompute.createTexture()
         const map = this.gpuCompute.createTexture()

@@ -36,10 +36,10 @@ LOGO.element.text.build = class{
         if(!this.play) return
 
         if(next){
-            this.arr.forEach(e => {
-                e.style.opacity = '1'
-                // e.style.transform = 'translate(0, 0)'
-            })
+            // this.arr.forEach(e => {
+            //     e.style.opacity = '1'
+            //     // e.style.transform = 'translate(0, 0)'
+            // })
             this.after()
             this.play = false
         }
@@ -48,7 +48,8 @@ LOGO.element.text.build = class{
 
     // after
     after(){
-        const delay = this.arr.length * 50 + 300 + 500
+        // const delay = this.arr.length * 50 + 300 + 500
+        const delay = 250
 
         setTimeout(() => this.next = true, delay)
     }
