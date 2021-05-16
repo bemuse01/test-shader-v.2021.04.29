@@ -1,8 +1,7 @@
 BG.object.child.build = class{
     constructor(group, size, renderer){
         this.init(size, renderer)
-        this.create()
-        this.add(group)
+        this.create(group)
     }
 
 
@@ -12,6 +11,7 @@ BG.object.child.build = class{
         this.size = size
         this.oldTime = window.performance.now()
         this.renderer = renderer
+        this.src = 'assets/src/bg.png'
 
         this.initTexture()
     }
@@ -57,20 +57,28 @@ BG.object.child.build = class{
 
 
     // create
-    create(){
-        this.createMesh()
+    create(group){
+        this.createMesh(group)
     }
-    createMesh(){
-        const geometry = this.createGeometry()
-        const material = this.createMaterial()
-        this.mesh = new THREE.Mesh(geometry, material)
+    createMesh(group){
+        const img = new Image()
+        img.src = this.src
+
+        img.onload = () => {
+            const canvas = BG.object.child.method.createTextureFromCanvas(img, this.size.el)
+            const texture = new THREE.CanvasTexture(canvas)
+
+            const geometry = this.createGeometry()
+            const material = this.createMaterial(texture)
+            this.mesh = new THREE.Mesh(geometry, material)
+
+            this.add(group)
+        }
     }
     createGeometry(){
         return new THREE.PlaneGeometry(this.size.obj.w, this.size.obj.h, this.param.seg, this.param.seg)
     }
-    createMaterial(){
-        const texture = new THREE.TextureLoader().load('assets/src/bg.png')
-
+    createMaterial(texture){
         return new THREE.ShaderMaterial({
             vertexShader: BG.object.child.shader.draw.vertex,
             fragmentShader: BG.object.child.shader.draw.fragment,
@@ -92,12 +100,27 @@ BG.object.child.build = class{
         this.mesh.geometry.dispose()
         this.mesh.geometry = this.createGeometry()
 
-        this.initTexture()
+        this.resizeTexture()
+    }
+    resizeTexture(){
+        const img = new Image()
+        img.src = this.src
+
+        img.onload = () => {
+            const canvas = BG.object.child.method.createTextureFromCanvas(img, this.size.el)
+            const texture = new THREE.CanvasTexture(canvas)
+
+            this.mesh.material.uniforms['u_bg'].value = texture
+
+            this.initTexture()
+        }
     }
 
 
     // animate
     animate(next){
+        if(!this.mesh) return
+
         const currentTime = window.performance.now()
 
         this.gpuCompute.compute()
